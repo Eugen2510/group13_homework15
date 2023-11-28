@@ -20,20 +20,20 @@
 <body>
 
 <div class="note-form">
-    <h2 class="text-center">Редактирование заметки</h2>
+    <h2 class="text-center">Редагування нотатки</h2>
 
     <form th:action="@{/note/edit/{id}(id=${note.id})}" method="POST">
         <div class="mb-3">
-            <label for="title" class="form-label">Заголовок заметки</label>
-            <input  type="text" class="form-control" id="title" name="title" placeholder="Введите заголовок" th:value="${note.getTitle()}">
+            <label for="title" class="form-label">Заголовок нотатки</label>
+            <input  type="text" class="form-control" id="title" name="title" placeholder="Введіть заголовок" th:value="${note.getTitle()}">
         </div>
 
         <div class="mb-3">
-            <label for="content" class="form-label">Текст заметки</label>
-            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Введите текст" th:text="${note.getContent()}"></textarea>
+            <label for="content" class="form-label">Текст нотатки</label>
+            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Введіть текст" th:text="${note.getContent()}"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <button type="submit" class="btn btn-primary">Зберегти зміни</button>
     </form>
 </div>
 </body>

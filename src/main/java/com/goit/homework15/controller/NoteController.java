@@ -28,9 +28,9 @@ public class NoteController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createNote(@RequestParam(name = "noteTitle", required = false) String noteTitle,
-                             @RequestParam (name = "noteContent", required = false) String noteContent) {
-        Note note = noteService.createNote(noteTitle, noteContent);
+    public ModelAndView createNote(@RequestParam(name = "title", required = false) String title,
+                             @RequestParam (name = "content", required = false) String content) {
+        Note note = noteService.createNote(title, content);
         noteService.add(note);
         return getNotes();
     }
