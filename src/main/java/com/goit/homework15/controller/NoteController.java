@@ -5,6 +5,7 @@ import com.goit.homework15.entity.Note;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,37 +29,35 @@ public class NoteController {
     }
 
     @RequestMapping("/create")
-    public ModelAndView createNote(@RequestParam(name = "title", required = false) String title,
-                                   @RequestParam(name = "content", required = false) String content,
-                                   HttpServletRequest request) {
+    public String createNote(@RequestParam(name = "title", required = false) String title,
+                             @RequestParam(name = "content", required = false) String content,
+                             HttpServletRequest request) {
         if (request.getMethod().equals("GET")) {
-            return new ModelAndView("create_note");
+            return "create_note";
         }
         Note note = noteService.createNote(title, content);
         noteService.add(note);
-        return getNotes();
+        return "redirect:/note/list";
     }
 
     @PostMapping("/delete")
-    public ModelAndView deleteNote(@RequestParam(name = "id") long id) {
+    public String deleteNote(@RequestParam(name = "id") long id) {
         noteService.deleteById(id);
-        return getNotes();
+        return "redirect:/note/list";
     }
 
-
     @RequestMapping("/edit/{id}")
-    public ModelAndView editNote(@PathVariable(name = "id") long id,
-                                 @RequestParam(name = "title", required = false) String title,
-                                 @RequestParam(name = "content", required = false) String content,
-                                 HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String editNote(@PathVariable(name = "id") long id,
+                           @RequestParam(name = "title", required = false) String title,
+                           @RequestParam(name = "content", required = false) String content,
+                           HttpServletRequest request,
+                           Model model) {
         if (request.getMethod().equals("GET")) {
-            modelAndView.setViewName("edit_note");
-            modelAndView.addObject("note", noteService.getById(id));
-            return modelAndView;
+            model.addAttribute("note", noteService.getById(id));
+            return "edit_note";
         }
-
         noteService.update(noteService.createNote(id, title, content));
-        return getNotes();
+        model.addAttribute(noteService.listAll());
+        return "redirect:/note/list";
     }
 }
