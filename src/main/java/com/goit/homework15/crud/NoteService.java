@@ -1,6 +1,6 @@
 package com.goit.homework15.crud;
 
-import com.goit.homework15.entities.Note;
+import com.goit.homework15.entity.Note;
 import com.goit.homework15.noteexceptions.NoSuchNoteException;
 import org.springframework.stereotype.Service;
 
@@ -44,11 +44,26 @@ public class NoteService {
         noteToUpdate.setTitle(note.getTitle());
     }
 
-    public Note getBYId(long id){
+    public Note getById(long id){
         return notes.stream()
                 .filter(currentNote -> currentNote.getId() == id)
                 .findFirst()
                 .orElseThrow(NoSuchNoteException::new);
+    }
+
+    public Note createNote(String title, String content){
+        Note newNote = new Note();
+        newNote.setTitle(title);
+        newNote.setContent(content);
+        return newNote;
+    }
+
+    public Note createNote(long id, String title, String content){
+        Note newNote = new Note();
+        newNote.setId(id);
+        newNote.setTitle(title);
+        newNote.setContent(content);
+        return newNote;
     }
 
 }

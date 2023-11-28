@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Note List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+<h3 th:if="${notes.size() == 0}" class="text-center" >У вас немає жодної нотатки</h3>
+<div th:if="${notes.size() != 0}" class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header shadow">
+            <h2 class="text-center">Note List</h2>
+        </div>
+        <table  class="table table-bordered mt-3">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="note : ${notes}">
+                <td th:text="${note.title}">Title</td>
+                <td th:text="${note.content}">Content</td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/note/edit/{id}(id=${note.id})}">Edit ✏️ </a>
+
+                    <form th:action="@{/note/delete}" method="post" class="d-inline">
+                        <input type="hidden" name="id" th:value="${note.id}"/>
+                        <button type="submit" class="btn btn-primary">Delete 🗑️</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<a class="btn btn-primary btn-lg shadow flex-fill" th:href="@{/note/create}">Create new Note</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

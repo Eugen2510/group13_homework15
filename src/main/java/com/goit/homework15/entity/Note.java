@@ -1,4 +1,4 @@
-package com.goit.homework15.entities;
+package com.goit.homework15.entity;
 
 import lombok.Data;
 
