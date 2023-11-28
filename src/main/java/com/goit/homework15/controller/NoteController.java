@@ -3,13 +3,11 @@ package com.goit.homework15.controller;
 import com.goit.homework15.crud.NoteService;
 import com.goit.homework15.entity.Note;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 
 @RequiredArgsConstructor
 @Controller
